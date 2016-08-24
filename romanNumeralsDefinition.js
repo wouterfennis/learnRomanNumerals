@@ -1,0 +1,29 @@
+const romanNumeralsList = [{
+    romanCharacter: "M",
+    decimalValue: 1000,
+    canBeSubtracted: false
+}, {
+    romanCharacter: "D",
+    decimalValue: 500,
+    canBeSubtracted: false
+}, {
+    romanCharacter: "C",
+    decimalValue: 100,
+    canBeSubtracted: true
+}, {
+    romanCharacter: "L",
+    decimalValue: 50,
+    canBeSubtracted: false
+}, {
+    romanCharacter: "X",
+    decimalValue: 10,
+    canBeSubtracted: true
+}, {
+    romanCharacter: "V",
+    decimalValue: 5,
+    canBeSubtracted: false
+}, {
+    romanCharacter: "I",
+    decimalValue: 1,
+    canBeSubtracted: true
+}];
