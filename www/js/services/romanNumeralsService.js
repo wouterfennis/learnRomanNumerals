@@ -71,4 +71,29 @@ angular.module('app.services', [])
 
       return answer;
     }
+
+    romanNumeralService.calculateDecimalToRomanNumeral = function(decimalValue){
+      var romanNumeralAnswer = "";
+
+      var remainingDecimalValue = decimalValue;
+
+      for(var i = 0; i < romanNumeralsList.length; i++){
+        var romanNumeralObject = romanNumeralsList[i];
+        while(decimalValueCanBeConverted(remainingDecimalValue, romanNumeralObject)){
+          // convert number to roman numeral and lower the remaining decimal value
+          romanNumeralAnswer = romanNumeralAnswer + romanNumeralObject.romanCharacter;
+          remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
+        }
+      }
+      return romanNumeralAnswer;
+    };
+
+    function decimalValueCanBeConverted(decimalValue, romanNumeralObject){
+      var canBeConverted = false;
+
+      if(decimalValue / romanNumeralObject.decimalValue > 0){
+        canBeConverted = true;
+      }
+      return canBeConverted;
+    }
   });
