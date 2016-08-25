@@ -4,6 +4,8 @@ angular.module('app.controllers')
       $scope.romanNumeral = "VII"
       $scope.decimalAnswer = "";
 
+    console.log(RomanNumeralsService.calculateDecimalToRomanNumeral(1111));
+
 
       $scope.addCharToAnswer = function(enteredChar){
         $scope.decimalAnswer = $scope.decimalAnswer + enteredChar;
