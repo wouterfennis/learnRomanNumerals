@@ -1,9 +1,64 @@
 <ion-view view-title="Roman To Decimal">
   <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+    <div class="card">
+      <div class="item text-center">
+        <h1>VIII</h1>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item text-center">
+        <p>Answer</p>
+        <h1 ng-model="decimalAnswer">8</h1>
+      </div>
+    </div>
+    <div class="card text-center">
+      <div class="row">
+        <div class="col">
+          <button class="button">7</button>
+        </div>
+        <div class="col">
+          <button class="button">8</button>
+        </div>
+        <div class="col">
+          <button class="button">9</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button">4</button>
+        </div>
+        <div class="col">
+          <button class="button">5</button>
+        </div>
+        <div class="col">
+          <button class="button">6</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button">1</button>
+        </div>
+        <div class="col">
+          <button class="button">2</button>
+        </div>
+        <div class="col">
+          <button class="button">3</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-assertive">C</button>
+        </div>
+        <div class="col">
+          <button class="button">0</button>
+        </div>
+        <div class="col">
+          <button class="button"><</button>
+        </div>
+      </div>
+    </div>
+    <button class="button button-full button-outline button-positive text-center">
+      Check answer
+    </button>
   </ion-content>
 </ion-view>
