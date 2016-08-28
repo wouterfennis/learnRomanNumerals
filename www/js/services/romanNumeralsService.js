@@ -6,6 +6,8 @@ angular.module('app.services', [])
     var romanNumeralService = this;
     var romanNumeralsList = RomanNumeralsDefinition.all();
     var MAX_SAME_ROMAN_CHARS = 3;
+    var MAX_ROMAN_NUMERAL_VALUE = 3888;
+    var MIN_ROMAN_NUMERAL_VALUE = 1;
 
     // public function
     romanNumeralService.calculateRomanNumeralToDecimal = function(romanNumeral){
@@ -104,5 +106,17 @@ angular.module('app.services', [])
         canBeConverted = true;
       }
       return canBeConverted;
+    }
+
+
+    romanNumeralService.calculateRandomRomanNumeral = function(){
+      var randomDecimalValue = getRandomDecimalValue();
+      var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
+      return randomRomanNumeral;
+    };
+
+    function getRandomDecimalValue(){
+      var randomDecimalValue = Math.floor((Math.random() * MAX_ROMAN_NUMERAL_VALUE) + MIN_ROMAN_NUMERAL_VALUE);
+      return randomDecimalValue;
     }
   });
