@@ -82,6 +82,7 @@ angular.module('app.services', [])
       console.log("startup value: " + remainingDecimalValue);
       for(var i = 0; i < romanNumeralsList.length; i++){
         var romanNumeralObject = romanNumeralsList[i];
+        var previousRomanNumeral = romanNumeralsList[i-1];
         var romanCharCounter = 0;
         while(decimalValueCanBeConverted(remainingDecimalValue, romanNumeralObject)){
           if(romanCharCounter < MAX_SAME_ROMAN_CHARS){
@@ -91,7 +92,12 @@ angular.module('app.services', [])
             console.log("Na aftrek: " + remainingDecimalValue);
             romanCharCounter++
           } else {
-            // more than 3 chars are about to be placed next to each other!!!
+            // more than 3 chars are about to be placed next to each other!!
+            // replace last two chars with previous (bigger) roman character
+            console.log("Roman Numeral needs te be adjusted! More than 3 chars!");
+            romanNumeralAnswer = adjustRomanCharsNotation(romanNumeralAnswer, previousRomanNumeral);
+            remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
+            break;
           }
 
         }
@@ -106,6 +112,16 @@ angular.module('app.services', [])
         canBeConverted = true;
       }
       return canBeConverted;
+    }
+
+    function adjustRomanCharsNotation(romanNumeralAnswer, previousRomanNumeral){
+      console.log(adjustedNotation);
+      var replacementRomanCharacter = previousRomanNumeral.romanCharacter;
+      var adjustedNotation = romanNumeralAnswer.slice(0, -2);
+      console.log(adjustedNotation);
+      adjustedNotation = adjustedNotation + replacementRomanCharacter;
+      console.log(adjustedNotation);
+      return adjustedNotation;
     }
 
 
