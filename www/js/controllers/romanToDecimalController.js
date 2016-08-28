@@ -1,11 +1,16 @@
 angular.module('app.controllers')
 
   .controller('RomanToDecimalController', function($scope, RomanNumeralsService) {
-      $scope.romanNumeral = "VII"
-      $scope.decimalAnswer = "";
+      $scope.romanNumeral = undefined;
+      $scope.decimalAnswer = undefined;
 
-    console.log(RomanNumeralsService.calculateDecimalToRomanNumeral(1111));
 
+      function resetForm(){
+        $scope.romanNumeral = RomanNumeralsService.calculateRandomRomanNumeral();
+        $scope.decimalAnswer = "";
+      }
+
+      resetForm();
 
       $scope.addCharToAnswer = function(enteredChar){
         $scope.decimalAnswer = $scope.decimalAnswer + enteredChar;
@@ -25,6 +30,8 @@ angular.module('app.controllers')
         var userAnswer = parseInt($scope.decimalAnswer);
         if(correctAnswer === userAnswer){
           showSuccessMessage("Correct Answer!");
+          // causes a bug/ infinite loop when triggered
+          resetForm();
         } else {
           showErrorMessage("Wrong Answer!");
         }
