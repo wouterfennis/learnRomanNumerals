@@ -34,6 +34,12 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.factorie
       url: '/romanToDecimal',
       templateUrl: 'templates/romanToDecimal.html',
       controller: 'RomanToDecimalController'
+    })
+
+    .state('decimalToRoman', {
+    url: '/decimalToRoman',
+    templateUrl: 'templates/decimalToRoman.html',
+    controller: 'DecimalToRomanController'
     });
 
   // if none of the above states are matched, use this as the fallback
