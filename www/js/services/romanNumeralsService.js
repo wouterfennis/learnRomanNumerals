@@ -5,6 +5,9 @@ angular.module('app.services', [])
 
     var romanNumeralService = this;
     var romanNumeralsList = RomanNumeralsDefinition.all();
+    var MAX_SAME_ROMAN_CHARS = 3;
+    var MAX_ROMAN_NUMERAL_VALUE = 3888;
+    var MIN_ROMAN_NUMERAL_VALUE = 1;
 
     // public function
     romanNumeralService.calculateRomanNumeralToDecimal = function(romanNumeral){
@@ -76,13 +79,18 @@ angular.module('app.services', [])
       var romanNumeralAnswer = "";
 
       var remainingDecimalValue = decimalValue;
-
+      console.log("startup value: " + remainingDecimalValue);
       for(var i = 0; i < romanNumeralsList.length; i++){
         var romanNumeralObject = romanNumeralsList[i];
+        var previousRomanNumeral = romanNumeralsList[i-1];
+        var romanCharCounter = 0;
         while(decimalValueCanBeConverted(remainingDecimalValue, romanNumeralObject)){
-          // convert number to roman numeral and lower the remaining decimal value
-          romanNumeralAnswer = romanNumeralAnswer + romanNumeralObject.romanCharacter;
-          remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
+          if(romanCharCounter < MAX_SAME_ROMAN_CHARS){
+            // convert number to roman numeral and lower the remaining decimal value
+            romanNumeralAnswer = romanNumeralAnswer + romanNumeralObject.romanCharacter;
+            remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
+            romanCharCounter++
+          }
         }
       }
       return romanNumeralAnswer;
@@ -90,10 +98,20 @@ angular.module('app.services', [])
 
     function decimalValueCanBeConverted(decimalValue, romanNumeralObject){
       var canBeConverted = false;
-
-      if(decimalValue / romanNumeralObject.decimalValue > 0){
+      if(decimalValue / romanNumeralObject.decimalValue >= 1){
         canBeConverted = true;
       }
       return canBeConverted;
+    }
+
+    romanNumeralService.calculateRandomRomanNumeral = function(){
+      var randomDecimalValue = getRandomDecimalValue();
+      var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
+      return randomRomanNumeral;
+    };
+
+    function getRandomDecimalValue(){
+      var randomDecimalValue = Math.floor((Math.random() * MAX_ROMAN_NUMERAL_VALUE) + MIN_ROMAN_NUMERAL_VALUE);
+      return randomDecimalValue;
     }
   });
