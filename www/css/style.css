@@ -4,6 +4,32 @@
   display: block;
 }
 
+.button.button-green {
+  border-color: transparent;
+  background-color: #28A44C;
+  color: #000000; }
+.button.button-green:hover {
+  color: #000000;
+  text-decoration: none; }
+.button.button-green.active, .button.button-green.activated {
+  background-color:#145226; }
+.button.button-green.button-clear {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #28A44C; }
+.button.button-green.button-icon {
+  border-color: transparent;
+  background: none; }
+.button.button-green.button-outline {
+  border-color: #28A44C;
+  background: transparent;
+  color: #28A44C; }
+.button.button-green.button-outline.active, .button.button-green.button-outline.activated {
+  background-color: #28A44C;
+  box-shadow: none;
+  color: #000000; }
+
 .answer-field{
   height: 76px;
 }
