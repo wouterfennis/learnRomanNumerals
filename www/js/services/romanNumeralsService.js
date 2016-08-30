@@ -105,12 +105,12 @@ angular.module('app.services', [])
     }
 
     romanNumeralService.calculateRandomRomanNumeral = function(){
-      var randomDecimalValue = getRandomDecimalValue();
+      var randomDecimalValue = romanNumeralService.calculateRandomDecimalValue();
       var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
       return randomRomanNumeral;
     };
 
-    function getRandomDecimalValue(){
+    romanNumeralService.calculateRandomDecimalValue = function(){
       var randomDecimalValue = Math.floor((Math.random() * MAX_ROMAN_NUMERAL_VALUE) + MIN_ROMAN_NUMERAL_VALUE);
       return randomDecimalValue;
     }
