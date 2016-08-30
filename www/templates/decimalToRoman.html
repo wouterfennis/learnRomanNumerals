@@ -1,0 +1,58 @@
+<ion-view view-title="Decimal To Roman">
+  <ion-content>
+    <div class="card">
+      <div class="item item-divider">
+        What is the roman value of:
+      </div>
+      <div class="item text-center">
+        <h1>{{decimalValue}}</h1>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Answer:
+      </div>
+      <div class="item text-center answer-field">
+        <h1 >{{romanAnswer}}</h1>
+      </div>
+    </div>
+    <div class="card text-center">
+      <div class="row">
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('M')">M</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('D')">D</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('C')">C</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('L')">L</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('X')">X</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('V')">V</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-assertive" ng-click="clearDecimalAnswer()">C</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="addCharToAnswer('I')">0</button>
+        </div>
+        <div class="col">
+          <button class="button button-stable" ng-click="removeLastCharFromAnswer()"><i class="icon ion-backspace"></i></button>
+        </div>
+      </div>
+    </div>
+    <button class="button button-full button-outline button-positive text-center" ng-click="checkAnswer()">
+      Check answer
+    </button>
+  </ion-content>
+</ion-view>
