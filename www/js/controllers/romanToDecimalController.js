@@ -30,7 +30,6 @@ angular.module('app.controllers')
         var userAnswer = parseInt($scope.decimalAnswer);
         if(correctAnswer === userAnswer){
           showSuccessMessage("Correct Answer!");
-          // causes a bug/ infinite loop when triggered
           resetForm();
         } else {
           showErrorMessage("Wrong Answer!");
