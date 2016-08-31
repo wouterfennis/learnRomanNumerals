@@ -3,3 +3,51 @@
   margin-right: auto;
   display: block;
 }
+
+.app-background{
+  background: rgb(242,245,246); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+}
+
+.button.button-green {
+  border-color: transparent;
+  background-color: #28A44C;
+  color: #000000; }
+.button.button-green:hover {
+  color: #000000;
+  text-decoration: none; }
+.button.button-green.active, .button.button-green.activated {
+  background-color:#145226; }
+.button.button-green.button-clear {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #28A44C; }
+.button.button-green.button-icon {
+  border-color: transparent;
+  background: none; }
+.button.button-green.button-outline {
+  border-color: #28A44C;
+  background: transparent;
+  color: #28A44C; }
+.button.button-green.button-outline.active, .button.button-green.button-outline.activated {
+  background-color: #28A44C;
+  box-shadow: none;
+  color: #000000; }
+
+.answer-field{
+  height: 76px;
+}
+
+.copyright-footer{
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.copyright-footer a{
+  color: #FFFFFF;
+  font-weight: bold;
+}
