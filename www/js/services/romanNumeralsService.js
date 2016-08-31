@@ -12,21 +12,19 @@ angular.module('app.services', [])
     // public function
     romanNumeralService.calculateRomanNumeralToDecimal = function(romanNumeral){
       var decimalAnswer = 0;
-      var romanNumeralLength = romanNumeral.length;
+      var romanNumeralLength = romanNumeral.length -1;
 
-      for (var i = 0; i < romanNumeralLength; i++) {
-        var leftCharacter = romanNumeral[i];
-        var rightCharacterIndex = i + 1;
-        var rightCharacter = romanNumeral[rightCharacterIndex];
-        if (rightCharacterIndex < romanNumeralLength) {
+      for (var i = romanNumeralLength; i >= 0 ; i--) {
+        var rightCharacter = romanNumeral[i];
+        var leftCharacterIndex = i + -1;
+        var leftCharacter = romanNumeral[leftCharacterIndex];
+        if (leftCharacterIndex >= 0) {
           decimalAnswer = decimalAnswer + calculateTwoCharacters(leftCharacter, rightCharacter);
         } else {
-          decimalAnswer = decimalAnswer + calculateOneCharacter(leftCharacter);
+          decimalAnswer = decimalAnswer + calculateOneCharacter(rightCharacter);
         }
-        i++;
+        i--;
       }
-
-      console.log(decimalAnswer);
       return decimalAnswer;
     };
 
@@ -79,7 +77,6 @@ angular.module('app.services', [])
       var romanNumeralAnswer = "";
 
       var remainingDecimalValue = decimalValue;
-      console.log("startup value: " + remainingDecimalValue);
       for(var i = 0; i < romanNumeralsList.length; i++){
         var romanNumeralObject = romanNumeralsList[i];
         var previousRomanNumeral = romanNumeralsList[i-1];
@@ -107,6 +104,7 @@ angular.module('app.services', [])
     romanNumeralService.calculateRandomRomanNumeral = function(){
       var randomDecimalValue = romanNumeralService.calculateRandomDecimalValue();
       var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
+      randomRomanNumeral = "XIV";
       return randomRomanNumeral;
     };
 
