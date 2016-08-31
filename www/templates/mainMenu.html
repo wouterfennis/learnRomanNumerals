@@ -1,10 +1,22 @@
-<ion-view view-title="Main Menu">
+<ion-view view-title="Menu" class="app-background">
   <ion-content class="padding">
-    <button class="button button-block button-positive" ui-sref="romanToDecimal">
-      Roman To Decimal (V --> 5)
+    <button class="button button-full button-positive" ui-sref="romanToDecimal">
+      Roman To Decimal (V <i class="fa fa-arrow-right" aria-hidden="true"></i> 5)
     </button>
-    <button class="button button-block button-positive" ui-sref="decimalToRoman">
-      Decimal To Roman (5 --> V)
+    <button class="button button-full button-positive" ui-sref="decimalToRoman">
+      Decimal To Roman (5 <i class="fa fa-arrow-right" aria-hidden="true"></i> V)
+    </button>
+    <button class="button button-full button-positive" ui-sref="decimalToRoman">
+      Statistics <i class="fa fa-bar-chart" aria-hidden="true"></i>
     </button>
   </ion-content>
+  <ion-footer-bar class="bar-positive copyright-footer">
+    <span class="title">
+      <i class="fa fa-copyright" aria-hidden="true"></i>
+      &nbsp;2016 - Created by&nbsp;
+      <a href="https://www.linkedin.com/in/wouter-fennis-98968bb8" target="_blank" title="Wouter Fennis Linkedin">
+        Wouter Fennis
+      </a>
+    </span>
+  </ion-footer-bar>
 </ion-view>
