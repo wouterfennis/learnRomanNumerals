@@ -27,6 +27,7 @@ angular.module('app.controllers')
 
       $scope.checkAnswer = function(){
         var correctAnswer = RomanNumeralsService.calculateRomanNumeralToDecimal($scope.romanNumeral);
+          console.log("Correct answer: " + correctAnswer);
         var userAnswer = parseInt($scope.decimalAnswer);
         if(correctAnswer === userAnswer){
           showSuccessMessage("Correct Answer!");
