@@ -1,7 +1,7 @@
 angular.module('app.services', [])
 
 
-  .service('RomanNumeralsService', function(RomanNumeralsDefinition) {
+.service('RomanNumeralsService', function (RomanNumeralsDefinition) {
 
     var romanNumeralService = this;
     var romanNumeralsList = RomanNumeralsDefinition.all();
@@ -10,106 +10,71 @@ angular.module('app.services', [])
     var MIN_ROMAN_NUMERAL_VALUE = 1;
 
     // public function
-    romanNumeralService.calculateRomanNumeralToDecimal = function(romanNumeral){
-      var decimalAnswer = 0;
-      var romanNumeralLength = romanNumeral.length -1;
+    romanNumeralService.calculateRomanNumeralToDecimal = function (romanNumeral) {
 
-      for (var i = romanNumeralLength; i >= 0 ; i--) {
-        var rightCharacter = romanNumeral[i];
-        var leftCharacterIndex = i + -1;
-        var leftCharacter = romanNumeral[leftCharacterIndex];
-        if (leftCharacterIndex >= 0) {
-          decimalAnswer = decimalAnswer + calculateTwoCharacters(leftCharacter, rightCharacter);
-        } else {
-          decimalAnswer = decimalAnswer + calculateOneCharacter(rightCharacter);
+        var decimalAnswer = 0;
+
+        for (var i = 0; i < romanNumeralsList.length; i++) {
+            var romanNumberObject = romanNumeralsList[i];
+            if (romanNumberObject.isSpecialNotation) {
+                while (romanNumeral.indexOf(romanNumberObject.romanCharacter) !== -1) {
+                    decimalAnswer = decimalAnswer + romanNumberObject.decimalValue;
+                    romanNumeral = romanNumeral.replace(romanNumberObject.romanCharacter, "#");
+                }
+            }
         }
-        i--;
-      }
-      return decimalAnswer;
+
+        for (var i = 0; i < romanNumeralsList.length; i++) {
+            var romanNumberObject = romanNumeralsList[i];
+            if (!romanNumberObject.isSpecialNotation) {
+                while (romanNumeral.indexOf(romanNumberObject.romanCharacter) !== -1) {
+                    decimalAnswer = decimalAnswer + romanNumberObject.decimalValue;
+                    romanNumeral = romanNumeral.replace(romanNumberObject.romanCharacter, "#");
+                }
+            }
+        }
+
+        return decimalAnswer;
+
     };
 
-    function calculateTwoCharacters(leftCharacter, rightCharacter) {
-      var answer = undefined;
-      var leftRomanNumberObject = searchForRomanNumberObject(leftCharacter);
-      var rightRomanNumberObject = searchForRomanNumberObject(rightCharacter);
-      if (leftRomanNumberObject.decimalValue < rightRomanNumberObject.decimalValue) {
-        answer = subtractRomanNumbers(leftRomanNumberObject, rightRomanNumberObject);
-      } else if (leftRomanNumberObject.decimalValue >= rightRomanNumberObject.decimalValue) {
-        answer = addRomanNumbers(leftRomanNumberObject, rightRomanNumberObject);
-      }
-      return answer;
-    }
+    romanNumeralService.calculateDecimalToRomanNumeral = function (decimalValue) {
+        var romanNumeralAnswer = "";
 
-    function calculateOneCharacter(character) {
-      var romanNumberObject = searchForRomanNumberObject(character);
-      var answer = romanNumberObject.decimalValue;
-      return answer;
-    }
-
-    function searchForRomanNumberObject(romanCharacter) {
-      var wantedRomanNumberObject = undefined;
-
-      for (var i = 0; i < romanNumeralsList.length; i++) {
-        var possibleRomanNumberObject = romanNumeralsList[i];
-        if (possibleRomanNumberObject.romanCharacter === romanCharacter) {
-          wantedRomanNumberObject = possibleRomanNumberObject;
+        var remainingDecimalValue = decimalValue;
+        for (var i = 0; i < romanNumeralsList.length; i++) {
+            var romanNumeralObject = romanNumeralsList[i];
+            var previousRomanNumeral = romanNumeralsList[i - 1];
+            var romanCharCounter = 0;
+            while (decimalValueCanBeConverted(remainingDecimalValue, romanNumeralObject)) {
+                if (romanCharCounter < MAX_SAME_ROMAN_CHARS) {
+                    // convert number to roman numeral and lower the remaining decimal value
+                    romanNumeralAnswer = romanNumeralAnswer + romanNumeralObject.romanCharacter;
+                    remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
+                    romanCharCounter++
+                }
+            }
         }
-      }
-
-      return wantedRomanNumberObject;
-    }
-
-    function subtractRomanNumbers(leftRomanNumberObject, rightRomanNumberObject) {
-      var answer = 0;
-      if (leftRomanNumberObject.canBeSubtracted) {
-        answer = rightRomanNumberObject.decimalValue - leftRomanNumberObject.decimalValue;
-      }
-      return answer;
-    }
-
-    function addRomanNumbers(leftRomanNumberObject, rightRomanNumberObject) {
-      var answer = leftRomanNumberObject.decimalValue + rightRomanNumberObject.decimalValue;
-
-      return answer;
-    }
-
-    romanNumeralService.calculateDecimalToRomanNumeral = function(decimalValue){
-      var romanNumeralAnswer = "";
-
-      var remainingDecimalValue = decimalValue;
-      for(var i = 0; i < romanNumeralsList.length; i++){
-        var romanNumeralObject = romanNumeralsList[i];
-        var previousRomanNumeral = romanNumeralsList[i-1];
-        var romanCharCounter = 0;
-        while(decimalValueCanBeConverted(remainingDecimalValue, romanNumeralObject)){
-          if(romanCharCounter < MAX_SAME_ROMAN_CHARS){
-            // convert number to roman numeral and lower the remaining decimal value
-            romanNumeralAnswer = romanNumeralAnswer + romanNumeralObject.romanCharacter;
-            remainingDecimalValue = remainingDecimalValue - romanNumeralObject.decimalValue;
-            romanCharCounter++
-          }
-        }
-      }
-      return romanNumeralAnswer;
+        return romanNumeralAnswer;
     };
 
-    function decimalValueCanBeConverted(decimalValue, romanNumeralObject){
-      var canBeConverted = false;
-      if(decimalValue / romanNumeralObject.decimalValue >= 1){
-        canBeConverted = true;
-      }
-      return canBeConverted;
+    function decimalValueCanBeConverted(decimalValue, romanNumeralObject) {
+        var canBeConverted = false;
+        if (decimalValue / romanNumeralObject.decimalValue >= 1) {
+            canBeConverted = true;
+        }
+        return canBeConverted;
     }
 
-    romanNumeralService.calculateRandomRomanNumeral = function(){
-      var randomDecimalValue = romanNumeralService.calculateRandomDecimalValue();
-      var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
-      randomRomanNumeral = "XIV";
-      return randomRomanNumeral;
+    romanNumeralService.calculateRandomRomanNumeral = function () {
+        var randomDecimalValue = romanNumeralService.calculateRandomDecimalValue();
+        console.log("Random number: " + randomDecimalValue);
+        var randomRomanNumeral = romanNumeralService.calculateDecimalToRomanNumeral(randomDecimalValue);
+        return randomRomanNumeral;
     };
 
-    romanNumeralService.calculateRandomDecimalValue = function(){
-      var randomDecimalValue = Math.floor((Math.random() * MAX_ROMAN_NUMERAL_VALUE) + MIN_ROMAN_NUMERAL_VALUE);
-      return randomDecimalValue;
+    romanNumeralService.calculateRandomDecimalValue = function () {
+        var randomDecimalValue = Math.floor((Math.random() * MAX_ROMAN_NUMERAL_VALUE) + MIN_ROMAN_NUMERAL_VALUE);
+        return randomDecimalValue;
     }
-  });
+});
